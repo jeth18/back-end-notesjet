@@ -11,6 +11,8 @@ const requestLogger = (request, response, next) => {
   }
 
 
+app.use(express.static('build'))
+
 app.use(requestLogger)
 
 app.use(express.json())
@@ -87,9 +89,10 @@ app.post('/api/notes', (request, response) => {
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
 }
-  
+
 app.use(unknownEndpoint)
 app.use(cors())
+
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
